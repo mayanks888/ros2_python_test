@@ -1,0 +1,52 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Release'",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "build (debug)",
+      "type": "shell",
+      "command": "colcon build --cmake-args '-DCMAKE_BUILD_TYPE=Debug'",
+      "group": "build",
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "clean",
+      "type": "shell",
+      "command": "rm -rf build/ log/ install/ __pycache__/",
+      "group": "build",
+      "problemMatcher": "$gcc"
+    },
+    {
+      "label": "test",
+      "type": "shell",
+      "command": "colcon test && colcon test-result",
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "type": "shell",
+      "label": "g++ build active file",
+      "command": "/usr/bin/g++",
+      "args": [
+        "-g",
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}"
+      ],
+      "options": {
+        "cwd": "/usr/bin"
+      }
+    }
+  ]
+}
