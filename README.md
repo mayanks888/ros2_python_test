@@ -7,4 +7,5 @@ this repository contain basic explanation of python pytest and their implementat
 
       https://www.jetbrains.com/help/pycharm/pytest.html
 
-   2. 
+   2. https://www.youtube.com/watch?v=Njm7MVJD6IE
+   3. 
