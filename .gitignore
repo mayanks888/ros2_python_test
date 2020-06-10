@@ -13,6 +13,6 @@ loaddocke_file
 Dockerfile_old
 perception_mayank
 *.idea
-
+.pytest_cache
 *.out
 *~
