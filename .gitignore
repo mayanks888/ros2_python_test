@@ -15,4 +15,16 @@ perception_mayank
 *.idea
 .pytest_cache
 *.out
+log
+build
+install
+launch/*cache*
+data/*
+nohup.out
+domain_id
+*.pt
+*~
+*.pyc
+*.db3
+
 *~
