@@ -28,28 +28,28 @@ from traffic_light_msgs.msg import TrafficLightStruct, Detection2D
 
 
 class Rectifier(Node):
-    def __init__(self):
+    def __init__(self,args_):
         #####################################33333
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--cfg', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/cfg/yolov3.cfg', help='*.cfg path')
-        parser.add_argument('--names', type=str, default='data/coco.names', help='*.names path')
-        parser.add_argument('--weights', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/weights/yolov3.pt',
-                            help='weights path')
-        parser.add_argument('--source', type=str, default='data/samples', help='source')
-        parser.add_argument('--output', type=str, default='output', help='output folder')  # output folder
-        parser.add_argument('--img-size', type=int, default=416, help='inference size (pixels)')
-        parser.add_argument('--conf-thres', type=float, default=0.3, help='object confidence threshold')
-        parser.add_argument('--iou-thres', type=float, default=0.6, help='IOU threshold for NMS')
-        parser.add_argument('--fourcc', type=str, default='mp4v', help='output video codec (verify ffmpeg support)')
-        parser.add_argument('--half', action='store_true', help='half precision FP16 inference')
-        parser.add_argument('--device', default='0', help='device id (i.e. 0 or 0,1) or cpu')
-        parser.add_argument('--view-img', action='store_true', help='display results')
-        parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')
-        parser.add_argument('--classes', nargs='+', type=int, help='filter by class')
-        parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
-        self.opt = parser.parse_args()
+        # parser = argparse.ArgumentParser()
+        # parser.add_argument('--cfg', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/cfg/yolov3.cfg', help='*.cfg path')
+        # parser.add_argument('--names', type=str, default='data/coco.names', help='*.names path')
+        # parser.add_argument('--weights', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/weights/yolov3.pt',
+        #                     help='weights path')
+        # parser.add_argument('--source', type=str, default='data/samples', help='source')
+        # parser.add_argument('--output', type=str, default='output', help='output folder')  # output folder
+        # parser.add_argument('--img-size', type=int, default=416, help='inference size (pixels)')
+        # parser.add_argument('--conf-thres', type=float, default=0.3, help='object confidence threshold')
+        # parser.add_argument('--iou-thres', type=float, default=0.6, help='IOU threshold for NMS')
+        # parser.add_argument('--fourcc', type=str, default='mp4v', help='output video codec (verify ffmpeg support)')
+        # parser.add_argument('--half', action='store_true', help='half precision FP16 inference')
+        # parser.add_argument('--device', default='0', help='device id (i.e. 0 or 0,1) or cpu')
+        # parser.add_argument('--view-img', action='store_true', help='display results')
+        # parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')
+        # parser.add_argument('--classes', nargs='+', type=int, help='filter by class')
+        # parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
+        # self.opt = parser.parse_args()
         #############################################
-        # self.opt = args_
+        self.opt = args_
         # print(self.opt)
         img_size = (
         320, 192) if ONNX_EXPORT else self.opt.img_size  # (320, 192) or (416, 256) or (608, 352) for (height, width)
@@ -87,9 +87,9 @@ class Rectifier(Node):
         
         # print("image shape is ", cv_img.shape)
         image_np = cv_img
-        image_np = cv2.cvtColor(image_np, cv2.COLOR_BAYER_BG2BGR, 3)
-        cv2.imshow('AI rectifier', image_np)
-        ch = cv2.waitKey(1000)
+        # image_np = cv2.cvtColor(image_np, cv2.COLOR_BAYER_BG2BGR, 3)
+        # cv2.imshow('AI rectifier', image_np)
+        # ch = cv2.waitKey(1000)
        ###############################################33333
     #    projection roi=ppros_data.projection_roi
     #    print("my_projection is",ppros_data.projection_roi)
@@ -159,8 +159,8 @@ class Rectifier(Node):
                         ppros_data.detections.append(single_detection)
                         # tmp = tmp.tolist()
                     # tmp = tmp.tolist()
-                    cv2.imshow('AI rectifier', image_np)
-                    ch = cv2.waitKey(10000)
+                    # cv2.imshow('AI rectifier', image_np)
+                    # ch = cv2.waitKey(100)
         else:
             tmp = [-1.0, 10.0, 10.0, 10.0, 10.0, 10.0]
 
@@ -176,28 +176,28 @@ class Rectifier(Node):
 
 
 def main(args=None):
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument('--cfg', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/cfg/yolov3.cfg', help='*.cfg path')
-    # parser.add_argument('--names', type=str, default='data/coco.names', help='*.names path')
-    # parser.add_argument('--weights', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/weights/yolov3.pt',
-    #                     help='weights path')
-    # parser.add_argument('--source', type=str, default='data/samples', help='source')
-    # parser.add_argument('--output', type=str, default='output', help='output folder')  # output folder
-    # parser.add_argument('--img-size', type=int, default=416, help='inference size (pixels)')
-    # parser.add_argument('--conf-thres', type=float, default=0.3, help='object confidence threshold')
-    # parser.add_argument('--iou-thres', type=float, default=0.6, help='IOU threshold for NMS')
-    # parser.add_argument('--fourcc', type=str, default='mp4v', help='output video codec (verify ffmpeg support)')
-    # parser.add_argument('--half', action='store_true', help='half precision FP16 inference')
-    # parser.add_argument('--device', default='0', help='device id (i.e. 0 or 0,1) or cpu')
-    # parser.add_argument('--view-img', action='store_true', help='display results')
-    # parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')
-    # parser.add_argument('--classes', nargs='+', type=int, help='filter by class')
-    # parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
-    # opt = parser.parse_args()
-    # print(opt)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--cfg', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/cfg/yolov3.cfg', help='*.cfg path')
+    parser.add_argument('--names', type=str, default='data/coco.names', help='*.names path')
+    parser.add_argument('--weights', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/weights/yolov3.pt',
+                        help='weights path')
+    parser.add_argument('--source', type=str, default='data/samples', help='source')
+    parser.add_argument('--output', type=str, default='output', help='output folder')  # output folder
+    parser.add_argument('--img-size', type=int, default=416, help='inference size (pixels)')
+    parser.add_argument('--conf-thres', type=float, default=0.3, help='object confidence threshold')
+    parser.add_argument('--iou-thres', type=float, default=0.6, help='IOU threshold for NMS')
+    parser.add_argument('--fourcc', type=str, default='mp4v', help='output video codec (verify ffmpeg support)')
+    parser.add_argument('--half', action='store_true', help='half precision FP16 inference')
+    parser.add_argument('--device', default='0', help='device id (i.e. 0 or 0,1) or cpu')
+    parser.add_argument('--view-img', action='store_true', help='display results')
+    parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')
+    parser.add_argument('--classes', nargs='+', type=int, help='filter by class')
+    parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
+    opt = parser.parse_args()
+    print(opt)
     rclpy.init(args=args)
     # with torch.no_grad():
-    node = Rectifier()
+    node = Rectifier(opt)
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
