@@ -67,9 +67,9 @@ class Rectifier(Node):
         
         # print("image shape is ", cv_img.shape)
         image_np = cv_img
-        # image_np = cv2.cvtColor(image_np, cv2.COLOR_BAYER_BG2BGR, 3)
+        image_np = cv2.cvtColor(image_np, cv2.COLOR_BAYER_BG2BGR, 3)
         cv2.imshow('AI rectifier', image_np)
-        ch = cv2.waitKey()
+        ch = cv2.waitKey(1000)
        ###############################################33333
     #    projection roi=ppros_data.projection_roi
     #    print("my_projection is",ppros_data.projection_roi)
@@ -80,7 +80,7 @@ class Rectifier(Node):
         # crop_img = img[y:y+h, x:x+w]
         image_np = image_np[cropped_roi.y_offset:cropped_roi.y_offset+cropped_roi.height, cropped_roi.x_offset:cropped_roi.x_offset+cropped_roi.width]
         # cv2.imshow("cropped", crop_img)
-        # cv2.waitKey(1)
+        # cv2.waitKey(10000)
        ######################################################3
 
         img, im0s = load_image_direct(image_np, img_size=416)
@@ -140,7 +140,7 @@ class Rectifier(Node):
                         # tmp = tmp.tolist()
                     # tmp = tmp.tolist()
                     cv2.imshow('AI rectifier', image_np)
-                    ch = cv2.waitKey(1)
+                    ch = cv2.waitKey(10000)
         else:
             tmp = [-1.0, 10.0, 10.0, 10.0, 10.0, 10.0]
 
@@ -150,8 +150,9 @@ class Rectifier(Node):
         print("Inference Time", time_cost)
         # print("publishing bbox:- ", self.tl_bbox.data)
         # print("publishing bbox:- ", ppros_data.detections)
-
+        
         self._pub.publish(ppros_data)
+        return (ppros_data)
 
 
 def main(args=None):

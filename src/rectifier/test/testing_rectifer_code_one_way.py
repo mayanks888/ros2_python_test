@@ -23,7 +23,7 @@ import builtin_interfaces.msg
 import rclpy
 # from python_pytest.subscriber_member_function import *
 # from rectifier.rectify_test import *
-import rectify_test
+import rectifier.rectify_test
 # import rectify_test
 from std_msgs.msg import String
 from traffic_light_msgs.msg import TrafficLightStruct
@@ -57,7 +57,7 @@ class TestTimeSource(unittest.TestCase):
         parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
         opt = parser.parse_args()
         ################################################################################
-        self.myobject =  rectify_test.Rectifier(opt)
+        self.myobject =  rectifier.rectify_test.Rectifier(opt)
         # rclpy.spin(self.minimal_subscriber)
         # rclpy.spin_once(self.myobject)
 
@@ -85,10 +85,10 @@ class TestTimeSource(unittest.TestCase):
         # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BAYER_BG2BGR)
         # Encode to "bayer_rggb8"
         # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BAYER_BG2BGR)
-        # cv_image=cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
         # msg=self.CreateDMessage(cv_image)
         image_message = bridge.cv2_to_imgmsg(cv_image, encoding="bgr8") 
         image_message.encoding="bayer_rggb8"
+        # image_message = bridge.cv2_to_imgmsg(msg, encoding="bayer_rggb8") 
         # image_message = cv2.cvtColor(image_message, cv2.COLOR_BAYER_BG2GRAY)
         # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
 
@@ -102,7 +102,6 @@ class TestTimeSource(unittest.TestCase):
         mydata.cropped_roi.width=450
         
         return_data=self.myobject.img_callback(mydata)
-        # print(return_data.detections[0])
         self.assertIsNotNone(return_data.detections[0])
         # self.assertIsNone(return_data.detections[0])
         # result=sum(self.k,self.j)

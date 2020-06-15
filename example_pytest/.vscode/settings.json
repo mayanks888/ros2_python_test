@@ -1,0 +1,11 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/dashing/lib/python3.6/site-packages"
+    ],
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pytestEnabled": true
+}

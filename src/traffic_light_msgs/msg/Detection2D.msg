@@ -2,7 +2,7 @@
 
 std_msgs/Header header # Header timestamp should be acquisition time of image
 
-string id        # The unique numeric ID of object detected.
+int64 id        # The unique numeric ID of object detected.
 
 float64 score   # The probability or confidence value of the detected object. By convention,
                 # This value should lie in the range [0-1].

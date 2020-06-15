@@ -12,23 +12,22 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "(gdb) Launch",
-            "type": "cppdbg",
+            "name": "PyTest",
+            "type": "python",
             "request": "launch",
-            "program": "/home/mayank_s/playing_ros/Gtest_ros2/a.out",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${workspaceFolder}",
-            "environment": [],
-            "externalConsole": false,
-            "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "text": "-enable-pretty-printing",
-                    "ignoreFailures": true
-                }
+            "stopOnEntry": false,
+            "pythonPath": "${config:python.interpreterPath}",
+            "module": "pytest",
+            "args": [
+                "-sv"
+            ],
+            "cwd": "${workspaceRoot}",
+            "env": {},
+            "envFile": "${workspaceRoot}/.env",
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
             ]
-        }
-    ]
+    
 }

@@ -12,31 +12,39 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # !/usr/bin/python3
-
+import pytest
 import time
 import unittest
-from unittest.mock import Mock
+# from unittest.mock import Mock
 import argparse
-from sensor_msgs.msg import Image
+# from sensor_msgs.msg import Image
 import numpy as np
-import builtin_interfaces.msg
+# import builtin_interfaces.msg
 import rclpy
 # from python_pytest.subscriber_member_function import *
 # from rectifier.rectify_test import *
-import rectify_test
+import rectifier.rectify_test
 # import rectify_test
 from std_msgs.msg import String
 from traffic_light_msgs.msg import TrafficLightStruct
 from cv_bridge import CvBridge
 import cv2
 
-class TestTimeSource(unittest.TestCase):
+class TestClass():
+    def setup_class(self):
+        print("setup_class called once for the class")
+        rclpy.init(args=None)
 
-    def setUp(self):
+    def teardown_class(self):
+        print("teardown_class called once for the class")
+
+
+    def setup_method(self):
+        print("setup_method called for every method")
         # self.context = rclpy.context.Context()
         # rclpy.init(context=self.context)
         # self.node = rclpy.create_node('mynode', namespace='/rclpy', context=self.context)
-        rclpy.init(args=None)
+        # rclpy.init(args=None)
         ####################################################333333
         parser = argparse.ArgumentParser()
         parser.add_argument('--cfg', type=str, default='/home/mayank_s/playing_ros/c++/ros2_play_old/src/rectifier/rectifier/cfg/yolov3.cfg', help='*.cfg path')
@@ -57,27 +65,24 @@ class TestTimeSource(unittest.TestCase):
         parser.add_argument('--agnostic-nms', action='store_true', help='class-agnostic NMS')
         opt = parser.parse_args()
         ################################################################################
-        self.myobject =  rectify_test.Rectifier(opt)
+        self.myobject =  rectifier.rectify_test.Rectifier(opt)
         # rclpy.spin(self.minimal_subscriber)
         # rclpy.spin_once(self.myobject)
 
-    def tearDown(self):
-        # self.node.destroy_node()
+    def teardown_method(self):
+        print("teardown_method called for every method")
+         # self.node.destroy_node()
         # rclpy.shutdown(context=self.context)
         self.myobject.destroy_node()
         rclpy.shutdown()
 
-    def CreateDMessage(self,img_depth):
 
-                bridge = CvBridge()
-                msg_d=Image()
-                msg_d.encoding = "bayer_rggb8"
-                msg_d.height = img_depth.shape[0]
-                msg_d.width = img_depth.shape[1]
-                msg_d.data = bridge.cv2_to_imgmsg(img_depth, "bgr8").data
 
-                return msg_d
-    
+    # def test_one(self):
+    #     print("one")
+    #     assert True
+    #     print("one after")
+
     def test_rectifeir(self):
         # 333333333333333333333333333333333
         cv_image=cv2.imread("/home/mayank_s/playing_ros/python/test/ros2_python_test/src/rectifier/rectifier/rectifer_test.jpg",1)
@@ -85,10 +90,10 @@ class TestTimeSource(unittest.TestCase):
         # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BAYER_BG2BGR)
         # Encode to "bayer_rggb8"
         # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BAYER_BG2BGR)
-        # cv_image=cv2.cvtColor(cv_image, cv2.COLOR_BGR2RGB)
         # msg=self.CreateDMessage(cv_image)
         image_message = bridge.cv2_to_imgmsg(cv_image, encoding="bgr8") 
         image_message.encoding="bayer_rggb8"
+        # image_message = bridge.cv2_to_imgmsg(msg, encoding="bayer_rggb8") 
         # image_message = cv2.cvtColor(image_message, cv2.COLOR_BAYER_BG2GRAY)
         # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
 
@@ -102,13 +107,9 @@ class TestTimeSource(unittest.TestCase):
         mydata.cropped_roi.width=450
         
         return_data=self.myobject.img_callback(mydata)
-        # print(return_data.detections[0])
-        self.assertIsNotNone(return_data.detections[0])
+        # assertIsNotNone(return_data.detections[0])
         # self.assertIsNone(return_data.detections[0])
         # result=sum(self.k,self.j)
         # self.assertEqual(result,(self.k+self.j))
         # self.assertIs(self.k,self.j)
         
-
-if __name__ == '__main__':
-    unittest.main()
