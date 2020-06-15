@@ -91,10 +91,8 @@ class TestTimeSource(unittest.TestCase):
         # image_message = bridge.cv2_to_imgmsg(msg, encoding="bayer_rggb8") 
         # image_message = cv2.cvtColor(image_message, cv2.COLOR_BAYER_BG2GRAY)
         # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2
-
         mydata=TrafficLightStruct()
         mydata.raw_image=image_message
-
         # #############################3
         mydata.cropped_roi.x_offset=941
         mydata.cropped_roi.y_offset=264

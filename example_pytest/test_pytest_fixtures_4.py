@@ -16,9 +16,9 @@ def test2(myvales):
 # pytest pytest_fixtures_4.py
 # pytest pytest_fixtures_4.py -k test2 -v
 
-# if __name__== "__main__":
+if __name__== "__main__":
 
-#     pytest.main()
+    pytest.main()
 
 
 
