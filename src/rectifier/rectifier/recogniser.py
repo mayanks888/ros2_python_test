@@ -61,7 +61,7 @@ class Recogniser(Node):
         cv_img = bridge.imgmsg_to_cv2(image_msg, 'passthrough')
         # print("image shape is ", cv_img.shape)
         image_np = cv_img
-        image_np = cv2.cvtColor(image_np, cv2.COLOR_BAYER_BG2BGR, 3)
+        # image_np = cv2.cvtColor(image_np, cv2.COLOR_BAYER_BG2BGR, 3)
         selected_roi=selected_data.selected_box
         print('new data',selected_roi)
         # crop_img = img[y:y+h, x:x+w]
@@ -102,6 +102,7 @@ class Recogniser(Node):
         selected_data.selected_box.header.stamp=another_time_msg  
         selected_data.selected_box.color=int(data)
         self._pub.publish(selected_data)
+        return(int(data))
 
 
 def main(args=None):

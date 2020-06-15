@@ -80,7 +80,7 @@ class TestTimeSource(unittest.TestCase):
     
     def test_rectifeir(self):
         # 333333333333333333333333333333333
-        cv_image=cv2.imread("/home/mayank_s/playing_ros/python/test/ros2_python_test/src/rectifier/rectifier/rectifer_test.jpg",1)
+        cv_image=cv2.imread("/home/mayank_s/playing_ros/python/test/ros2_python_test/src/rectifier/test/rectifer_test.jpg",1)
         bridge = CvBridge()
         # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BAYER_BG2BGR)
         # Encode to "bayer_rggb8"

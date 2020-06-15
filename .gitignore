@@ -26,5 +26,5 @@ domain_id
 *~
 *.pyc
 *.db3
-
+*/test/__pycache__
 *~
